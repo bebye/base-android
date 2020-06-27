@@ -1,4 +1,4 @@
-package com.bebye.base.viewmodel
+package com.bebye.base.extension
 
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.bebye.base.viewmodel.BaseViewModel
 
 /**
  * Created by mkwon on 27/06/2020.
