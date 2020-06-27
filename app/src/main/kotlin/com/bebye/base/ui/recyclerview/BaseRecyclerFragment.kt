@@ -1,6 +1,7 @@
 package com.bebye.base.ui.recyclerview
 
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +19,8 @@ abstract class BaseRecyclerFragment : BaseFragment<FragmentRecyclerViewBinding>(
     override var layoutResourceId = R.layout.fragment_recycler_view
 
     @CallSuper
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         dataBinding.recyclerView.apply {
             layoutManager = createLayoutManager()
             itemAnimator = DefaultItemAnimator()

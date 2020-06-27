@@ -1,40 +1,37 @@
-package com.bebye.base.ui
+package com.bebye.base.ui.bottomsheet
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.widget.FrameLayout
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import com.bebye.base.extension.observe
+import com.bebye.base.extension.getDeviceHeight
 import com.bebye.base.utils.AutoLifecycleObserver
-import com.bebye.base.utils.NetworkConnection
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.reactivex.rxjava3.disposables.Disposable
 
 /**
  * Created by mkwon on 27/06/2020.
  */
-abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
+abstract class BaseBottomSheetDialogFragment<VB : ViewDataBinding> : BottomSheetDialogFragment() {
 
     @get:LayoutRes
     protected abstract val layoutResourceId: Int
-
-    protected abstract fun refresh()
 
     protected lateinit var dataBinding: VB
 
     private val autoLifeCycleObserver by lazy { AutoLifecycleObserver(lifecycle) }
 
-    protected var isNetworkConnected: Boolean = true
-
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         autoLifeCycleObserver.init(this)
-        initNetworkConnection()
     }
 
     @CallSuper
@@ -44,19 +41,21 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
         return dataBinding.root
     }
 
-    protected open fun initNetworkConnection() {
-        NetworkConnection().observe(this, {
-            if (!isNetworkConnected && it) {
-                refresh()
-            } else if (!it) {
-                // TODO : show exception view
-            }
-            isNetworkConnected = it
-        })
-    }
-
     protected fun addDisposable(disposable: Disposable) {
         autoLifeCycleObserver.addDisposable(disposable)
+    }
+
+    protected fun setBottomSheetMinimumHeight(topMargin: Int) {
+        val minimumPeekHeight = requireActivity().getDeviceHeight() - topMargin
+        view?.viewTreeObserver?.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                view?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
+                dialog?.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)?.let {
+                    dataBinding.root.minimumHeight = minimumPeekHeight
+                    BottomSheetBehavior.from(it).peekHeight = minimumPeekHeight
+                }
+            }
+        })
     }
 
 }
