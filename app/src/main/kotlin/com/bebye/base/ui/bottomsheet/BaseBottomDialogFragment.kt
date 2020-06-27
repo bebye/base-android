@@ -19,7 +19,7 @@ import io.reactivex.rxjava3.disposables.Disposable
 /**
  * Created by mkwon on 27/06/2020.
  */
-abstract class BaseBottomSheetDialogFragment<VB : ViewDataBinding> : BottomSheetDialogFragment() {
+abstract class BaseBottomDialogFragment<VB : ViewDataBinding> : BottomSheetDialogFragment() {
 
     @get:LayoutRes
     protected abstract val layoutResourceId: Int
