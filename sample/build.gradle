@@ -53,6 +53,9 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
+    debugImplementation project(':base')
+    releaseImplementation project(':base')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // androidX : https://developer.android.com/jetpack/docs/release-notes
