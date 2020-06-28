@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion rootProject.compile_sdk_version
-    buildToolsVersion rootProject.build_tool_version
+    compileSdkVersion 29
+    buildToolsVersion "30.0.0"
 
     defaultConfig {
         applicationId "com.bebye.sample"
-        minSdkVersion rootProject.min_sdk_version
-        targetSdkVersion rootProject.target_sdk_version
+        minSdkVersion 21
+        targetSdkVersion 29
         versionCode 100
         versionName "1.0.0"
 
