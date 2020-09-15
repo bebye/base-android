@@ -3,9 +3,8 @@ package com.bebye.base.viewmodel
 import androidx.annotation.CallSuper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
 /**
@@ -14,7 +13,6 @@ import kotlinx.coroutines.Job
 open class BaseViewModel : ViewModel(), CoroutineThrottleInterface by CoroutineThrottle() {
 
     private val job = Job()
-    protected val viewModelScope = CoroutineScope(Dispatchers.Main + job)
 
     init {
         coroutineThrottleScope = viewModelScope
