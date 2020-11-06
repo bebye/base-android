@@ -1,0 +1,12 @@
+#!/bin/bash
+# If the branch starts with an issue number (ex. ISSUE-1), the issue number is entered as a prefix in the commit message.
+branch_name=$(git symbolic-ref --short HEAD)
+# $1 is the file containing the commit message.
+# A message is included when creating in the SourceTree or when the '-m' option is committed.
+orig_msg=`cat $1`
+issue_name=$(echo $branch_name | sed -n 's/^[a-z]*\/\([a-zA-Z]*[-_][0-9]*\).*$/\1/p')
+issue_name_in_msg=$(grep -c "$issue_name" $1)
+
+if [[ -n $issue_name ]] && [[ ! $issue_name_in_msg -ge 1 ]]; then
+    echo "$issue_name : $orig_msg" > $1
+fi
