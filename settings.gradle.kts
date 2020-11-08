@@ -1,2 +1,2 @@
-include ':base', ':sample'
+include(":base", ":sample")
 rootProject.name = "base-android"
