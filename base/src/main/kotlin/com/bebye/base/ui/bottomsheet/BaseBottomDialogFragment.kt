@@ -14,7 +14,6 @@ import com.bebye.base.extension.getDeviceHeight
 import com.bebye.base.utils.AutoLifecycleObserver
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import io.reactivex.rxjava3.disposables.Disposable
 
 /**
  * Created by mkwon on 27/06/2020.
@@ -39,10 +38,6 @@ abstract class BaseBottomDialogFragment<VB : ViewDataBinding> : BottomSheetDialo
         dataBinding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
         dataBinding.lifecycleOwner = this
         return dataBinding.root
-    }
-
-    protected fun addDisposable(disposable: Disposable) {
-        autoLifeCycleObserver.addDisposable(disposable)
     }
 
     protected fun setBottomSheetMinimumHeight(topMargin: Int) {

@@ -31,4 +31,3 @@ fun ComponentActivity.getDisplayMetrics() : DisplayMetrics {
     windowManager.defaultDisplay.getMetrics(displayMetrics)
     return displayMetrics
 }
-

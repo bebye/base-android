@@ -4,7 +4,6 @@ import androidx.annotation.CallSuper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.Job
 
 /**
@@ -18,8 +17,6 @@ open class BaseViewModel : ViewModel(), CoroutineThrottleInterface by CoroutineT
         coroutineThrottleScope = viewModelScope
     }
 
-    protected val disposable = CompositeDisposable()
-
     var isShowRefresh: MutableLiveData<Boolean> = MutableLiveData()
     var isShowProgress: MutableLiveData<Boolean> = MutableLiveData()
     var isShowFooter: MutableLiveData<Boolean> = MutableLiveData()
@@ -28,7 +25,6 @@ open class BaseViewModel : ViewModel(), CoroutineThrottleInterface by CoroutineT
 
     @CallSuper
     override fun onCleared() {
-        disposable.clear()
         job.cancel()
         super.onCleared()
     }

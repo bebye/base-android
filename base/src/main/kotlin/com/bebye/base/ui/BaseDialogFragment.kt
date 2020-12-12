@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.bebye.base.utils.AutoLifecycleObserver
-import io.reactivex.rxjava3.disposables.Disposable
 
 /**
  * Created by mkwon on 27/06/2020.
@@ -35,10 +34,6 @@ abstract class BaseDialogFragment<VB : ViewDataBinding> : DialogFragment() {
         dataBinding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
         dataBinding.lifecycleOwner = this
         return dataBinding.root
-    }
-
-    protected fun addDisposable(disposable: Disposable) {
-        autoLifeCycleObserver.addDisposable(disposable)
     }
 
 }

@@ -6,8 +6,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
+    compileSdkVersion(Versions.targetSdk)
 
     defaultConfig {
         minSdkVersion(Versions.minSdk)
@@ -70,7 +69,7 @@ dependencies {
     implementation(Dependency.AndroidX.fragment)
 
     // lifecycle
-    implementation(Dependency.Lifecycle.lifecycleExtension)
+    implementation(Dependency.Lifecycle.lifecycleLiveData)
     implementation(Dependency.Lifecycle.lifecycleViewModel)
 
     // material
@@ -79,17 +78,6 @@ dependencies {
     // ADID
     implementation(Dependency.Google.playServiceADID)
 
-    // rx
-    implementation(Dependency.Rx.android)
-    implementation(Dependency.Rx.kotlin)
-
     // coroutines
     implementation(Dependency.coroutines)
-
-    // test
-    testImplementation(Dependency.Test.junit)
-
-    // androidTest
-    androidTestImplementation(Dependency.AndroidTest.runner)
-    androidTestImplementation(Dependency.AndroidTest.espresso)
 }

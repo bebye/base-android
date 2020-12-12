@@ -12,7 +12,7 @@ object Dependency {
     }
 
     object Kotlin {
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     }
 
     object AndroidX {
@@ -65,7 +65,6 @@ object Dependency {
 
     object Work {
         const val work = "androidx.work:work-runtime:${Versions.work}"
-        const val workRxJava = "androidx.work:work-rxjava2:${Versions.work}"
         const val workTest = "androidx.work:work-testing:${Versions.work}"
     }
 
@@ -79,14 +78,8 @@ object Dependency {
 
     object Retrofit {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-        const val adapterRxJava2 = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
         const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
-    }
-
-    object Rx {
-        const val android = "io.reactivex.rxjava3:rxandroid:${Versions.rxAndroid}"
-        const val kotlin = "io.reactivex.rxjava3:rxkotlin:${Versions.rxKotlin}"
     }
 
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"

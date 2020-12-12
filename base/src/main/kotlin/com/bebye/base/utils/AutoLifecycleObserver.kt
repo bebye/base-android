@@ -7,16 +7,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.bebye.base.currentClassName
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.kotlin.plusAssign
 
 /**
  * Created by mkwon on 27/06/2020.
  */
 class AutoLifecycleObserver(private val lifecycle: Lifecycle) : LifecycleObserver {
-
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     var className: String? = null
 
@@ -28,11 +23,6 @@ class AutoLifecycleObserver(private val lifecycle: Lifecycle) : LifecycleObserve
     fun init(fragment: Fragment) {
         lifecycle.addObserver(this)
         className = fragment::class.java.simpleName
-    }
-
-    fun addDisposable(disposable: Disposable) {
-        check(lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED))
-        compositeDisposable += disposable
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -64,7 +54,6 @@ class AutoLifecycleObserver(private val lifecycle: Lifecycle) : LifecycleObserve
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private fun onDestroy() {
         logInfo("onDestroy()")
-        compositeDisposable.clear()
         lifecycle.removeObserver(this)
     }
 

@@ -58,10 +58,6 @@ object Versions {
     const val retrofit = "2.9.0"                    // https://square.github.io/retrofit/
     const val loggingInterceptor = "4.9.0"          // https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
 
-    // rx
-    const val rxAndroid = "3.0.0"                   // https://github.com/ReactiveX/RxAndroid
-    const val rxKotlin = "3.0.1"                    // https://github.com/ReactiveX/RxKotlin/releases
-
     // coroutines
     const val coroutines = "1.4.0"                  // https://github.com/Kotlin/kotlinx.coroutines/releases
 
