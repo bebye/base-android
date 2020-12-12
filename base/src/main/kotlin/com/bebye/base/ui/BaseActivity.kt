@@ -4,12 +4,13 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import com.bebye.base.permission.PermissionActivity
 import com.bebye.base.utils.AutoLifecycleObserver
 
 /**
  * Created by mkwon on 27/06/2020.
  */
-abstract class BaseActivity(private val isDataBinding: Boolean = false) : AppCompatActivity() {
+abstract class BaseActivity(private val isDataBinding: Boolean = false) : PermissionActivity() {
 
     @get:LayoutRes
     protected abstract val layoutResourceId: Int
