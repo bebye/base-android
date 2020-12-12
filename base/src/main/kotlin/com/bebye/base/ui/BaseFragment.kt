@@ -9,10 +9,8 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.bebye.base.extension.observe
 import com.bebye.base.utils.AutoLifecycleObserver
 import com.bebye.base.utils.NetworkConnection
-import io.reactivex.rxjava3.disposables.Disposable
 
 /**
  * Created by mkwon on 27/06/2020.
@@ -53,10 +51,6 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
             }
             isNetworkConnected = it
         })
-    }
-
-    protected fun addDisposable(disposable: Disposable) {
-        autoLifeCycleObserver.addDisposable(disposable)
     }
 
 }

@@ -15,7 +15,6 @@ abstract class BaseDataBindingActivity<VB : ViewDataBinding> : BaseActivity(true
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        autoLifeCycleObserver.init(this)
         dataBinding = DataBindingUtil.setContentView(this, layoutResourceId)
         dataBinding.lifecycleOwner = this
     }
