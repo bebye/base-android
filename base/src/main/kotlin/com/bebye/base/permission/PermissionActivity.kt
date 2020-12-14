@@ -3,8 +3,7 @@ package com.bebye.base.permission
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.bebye.base.extension.PermissionType
-import com.bebye.base.extension.checkPermissions
+import com.bebye.logger.log.Logger
 
 /**
  * Created by mkwon on 12/12/2020.
@@ -15,33 +14,50 @@ abstract class PermissionActivity : AppCompatActivity(), ActivityCompat.OnReques
 
     private var onPermissionCallback: OnPermissionCallback? = null
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            onPermissionCallback?.let { it(isGranted) }
-        }
-
-    protected fun checkPermissions(permissionType: PermissionType, onPermissionCallback: OnPermissionCallback) {
+    protected fun checkPermissions(
+        permissionType: PermissionUtil.PermissionType, onPermissionCallback: OnPermissionCallback
+    ) {
         checkPermissions(permissionType.permissions, onPermissionCallback)
     }
 
     protected fun checkPermissions(permissions: Array<String>, onPermissionCallback: OnPermissionCallback) {
         when {
-            checkPermissions(permissions) -> onPermissionCallback(true)
+            PermissionUtil.checkPermissions(this, permissions) -> onPermissionCallback(true)
             else -> requestPermission(permissions, onPermissionCallback)
         }
     }
 
     private fun requestPermission(permissions: Array<String>, onPermissionCallback: OnPermissionCallback) {
         this.onPermissionCallback = onPermissionCallback
-        for (permission in permissions) {
-            if (shouldShowRequestPermissionRationale(permission)) {
-                // TODO: show like toast
-                requestPermissionLauncher.launch(permission)
-            } else {
-                // TODO: show like toast
-                requestPermissionLauncher.launch(permission)
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            Logger.d("registerForActivityResult : $it")
+            for (permission in permissions) {
+                if (it.containsKey(permission) && it[permission] == false) {
+                    reRequestPermission(permission, onPermissionCallback)
+                    return@registerForActivityResult
+                }
             }
+            onPermissionCallback(true)
+        }.launch(permissions)
+    }
+
+    private fun reRequestPermission(permission: String, onPermissionCallback: OnPermissionCallback) {
+        if (shouldShowRequestPermissionRationale(permission)) {
+            // TODO: show like toast
+            Logger.d("shouldShowRequestPermissionRationale: true - $permission")
+            requestPermissionLauncher(permission, onPermissionCallback)
+        } else {
+            // TODO: show like toast
+            Logger.d("shouldShowRequestPermissionRationale: false - $permission")
+            requestPermissionLauncher(permission, onPermissionCallback)
         }
+    }
+
+    private fun requestPermissionLauncher(permission: String, onPermissionCallback: OnPermissionCallback) {
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            Logger.d("$permission = $it")
+            onPermissionCallback(it)
+        }.launch(permission)
     }
 
 }

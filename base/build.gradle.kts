@@ -56,6 +56,9 @@ android {
 dependencies {
     implementation(fileTree(mapOf("include" to listOf("*.jar"), "dir" to "libs")))
 
+    // logger module
+    implementation(project(":logger-android:logger"))
+
     // kotlin
     implementation(Dependency.Kotlin.stdlib)
 
@@ -80,4 +83,9 @@ dependencies {
 
     // coroutines
     implementation(Dependency.coroutines)
+
+    // test
+    testImplementation(Dependency.Test.junit)
+    testImplementation(Dependency.Test.mockito)
+    testImplementation(Dependency.Test.truth)
 }
