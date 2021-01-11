@@ -17,6 +17,8 @@ object PermissionUtil {
         RECORD_AUDIO(arrayOf(Manifest.permission.RECORD_AUDIO))
     }
 
+    private val PERMISSION_GALLERY =
+        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
     private val PERMISSION_GALLERY_Q = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
 
     fun checkGalleryPermission(context: Context) = checkPermissions(context, getGalleryPermissions())
@@ -49,7 +51,7 @@ object PermissionUtil {
 
     private fun getGalleryPermissions() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         PERMISSION_GALLERY_Q
-    } else PermissionType.GALLERY.permissions
+    } else PERMISSION_GALLERY
 
     private fun checkPermissionAvailable() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 
