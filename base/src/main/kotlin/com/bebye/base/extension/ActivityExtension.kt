@@ -19,6 +19,15 @@ fun ComponentActivity.getDeviceWidth() = getDisplaySize(false)
 
 fun ComponentActivity.getDeviceHeight() = getDisplaySize(true)
 
+fun ComponentActivity.getStatusBarHeight(): Int {
+    var result = 0
+    val resourceId: Int = resources.getIdentifier("status_bar_height", "dimen", "android")
+    if (resourceId > 0) {
+        result = resources.getDimensionPixelSize(resourceId)
+    }
+    return result
+}
+
 /**
  * with StatusBar and NavigationBar
  */
