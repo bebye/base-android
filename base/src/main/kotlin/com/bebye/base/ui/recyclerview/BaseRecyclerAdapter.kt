@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var items = mutableListOf<T>()
+    var items = listOf<T>()
         set(value) {
             field = value
             notifyDataSetChanged()
