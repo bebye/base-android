@@ -10,6 +10,7 @@ import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentManager
 import com.bebye.base.extension.getDeviceHeight
 import com.bebye.base.utils.AutoLifecycleObserver
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -19,6 +20,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
  * Created by mkwon on 27/06/2020.
  */
 abstract class BaseBottomDialogFragment<VB : ViewDataBinding> : BottomSheetDialogFragment() {
+
+    abstract val fragmentTag: String
 
     @get:LayoutRes
     protected abstract val layoutResourceId: Int
@@ -51,6 +54,10 @@ abstract class BaseBottomDialogFragment<VB : ViewDataBinding> : BottomSheetDialo
                 }
             }
         })
+    }
+
+    fun show(fragmentManager: FragmentManager) {
+        show(fragmentManager, fragmentTag)
     }
 
 }
