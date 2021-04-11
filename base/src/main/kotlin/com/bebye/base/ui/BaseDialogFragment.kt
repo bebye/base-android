@@ -9,12 +9,15 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.bebye.base.utils.AutoLifecycleObserver
 
 /**
  * Created by mkwon on 27/06/2020.
  */
 abstract class BaseDialogFragment<VB : ViewDataBinding> : DialogFragment() {
+
+    protected abstract val fragmentTag: String
 
     @get:LayoutRes
     protected abstract val layoutResourceId: Int
@@ -34,6 +37,11 @@ abstract class BaseDialogFragment<VB : ViewDataBinding> : DialogFragment() {
         dataBinding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
         dataBinding.lifecycleOwner = this
         return dataBinding.root
+    }
+
+    fun show(manager: FragmentManager) {
+        if (isAdded) return
+        super.show(manager, fragmentTag)
     }
 
 }
