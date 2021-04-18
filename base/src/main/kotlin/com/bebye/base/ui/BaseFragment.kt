@@ -33,7 +33,6 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         autoLifeCycleObserver.init(this)
-        initNetworkConnection()
     }
 
     @CallSuper
@@ -41,6 +40,11 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
         dataBinding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
         dataBinding.lifecycleOwner = this
         return dataBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initNetworkConnection()
     }
 
     protected open fun initNetworkConnection() {
