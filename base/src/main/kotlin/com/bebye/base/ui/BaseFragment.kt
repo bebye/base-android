@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.bebye.base.extension.observe
 import com.bebye.base.utils.AutoLifecycleObserver
 import com.bebye.base.utils.NetworkConnection
 
@@ -43,14 +44,14 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
     }
 
     protected open fun initNetworkConnection() {
-        NetworkConnection().observe(this, {
+        NetworkConnection().observe(viewLifecycleOwner) {
             if (!isNetworkConnected && it) {
                 refresh()
             } else if (!it) {
                 // TODO : show exception view
             }
             isNetworkConnected = it
-        })
+        }
     }
 
 }
