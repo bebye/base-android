@@ -11,7 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentManager
-import com.bebye.base.extension.getDeviceHeight
+import com.bebye.base.extension.getDisplayHeight
 import com.bebye.base.utils.AutoLifecycleObserver
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -44,7 +44,7 @@ abstract class BaseBottomDialogFragment<VB : ViewDataBinding> : BottomSheetDialo
     }
 
     protected fun setBottomSheetMinimumHeight(topMargin: Int) {
-        val minimumPeekHeight = requireActivity().getDeviceHeight() - topMargin
+        val minimumPeekHeight = requireActivity().getDisplayHeight() - topMargin
         view?.viewTreeObserver?.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 view?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
